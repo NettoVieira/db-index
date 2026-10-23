@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:16
+    container_name: index-lab
+    environment:
+      POSTGRES_PASSWORD: lab
+      POSTGRES_DB: lab
+    ports:
+      - "5432:5432"
+    volumes:
+      # Runs once, on the first start of the container: creates the table and loads 1M rows.
+      - ./sql/01_setup.sql:/docker-entrypoint-initdb.d/01_setup.sql:ro
